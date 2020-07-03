@@ -1,0 +1,432 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font: 400 16px Roboto, sans-serif;
+}
+
+body {
+  background-color: rgb(220, 255, 255);
+}
+
+header h1 {
+  font-size: 5rem;
+  text-align: center;
+  color: #2794e1;
+  margin: 35px;
+}
+
+header h5 {
+  font-size: 2rem;
+  text-align: center;
+  color: #2794e1;
+  margin: 35px;
+}
+
+.container {
+  width: 90vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.chatContainer {
+  width: 65%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.usersContainer {
+  width: 25%;
+  height: 87%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.usersContainer h4 {
+  font-size: 26px;
+  color: #2794e1;
+}
+
+#userDisconnect {
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  margin-top: 15px;
+}
+
+.userDisconnect {
+  background-color: red;
+  border-radius: 10px;
+}
+
+#chatMessages {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px black;
+  margin: 10px;
+  overflow-y: auto;
+}
+
+.messageContainer {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(to top, #9cffff, rgb(101, 251, 231));
+  border-radius: 10px;
+  margin: 10px;
+
+  word-wrap: break-word; /* Quebra a palavra */
+}
+
+.author {
+  text-align: center;
+  font-weight: bolder;
+  margin: 10px;
+}
+
+.message {
+  margin: 15px;
+}
+
+#userTyping {
+  width: 100%;
+  height: 35px;
+}
+
+.userTyping {
+  border-radius: 10px;
+  margin-top: 10px;
+  text-align: center;
+  font-style: italic;
+  line-height: 30px;
+  background-color: rgb(147, 238, 238);
+  animation-name: digitando;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}
+
+@keyframes digitando {
+  0% {
+    background-color: rgb(147, 238, 238);
+  }
+  50% {
+    background-color: rgb(220, 255, 255);
+  }
+  100% {
+    background-color: rgb(147, 238, 238);
+  }
+}
+
+.messageWarningDisconnect {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  background-color: rgb(228, 63, 34);
+  text-align: center;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.messageWarningConnect {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  background-color: rgb(57, 228, 34);
+  text-align: center;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.inputs {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.inputMessage {
+  width: 80%;
+  height: 70px;
+  font-size: 18px;
+  text-align: center;
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px black;
+  margin: 5px;
+  outline: none;
+}
+
+.buttonSendMessage {
+  width: 20%;
+  height: 70px;
+  font-size: 24px;
+  background-color: rgb(101, 251, 231);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px black;
+  outline: none;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.usersStatus {
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 2px 2px 5px black;
+  overflow-y: auto;
+}
+
+.loginContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  animation-name: fade;
+  animation-duration: 3s;
+  animation-timing-function: ease;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.form {
+  width: 50vw;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to top, steelblue, rgb(72, 136, 255));
+  border: 2px solid black;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px black;
+  text-align: center;
+  margin: 45px auto;
+}
+
+.infoTitle {
+  font-size: 30px;
+  color: white;
+  text-shadow: 2px 2px 5px black;
+}
+
+.nameInput {
+  width: 70%;
+  height: 35px;
+  text-align: center;
+  font-size: 20px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px black;
+  margin: 30px;
+  outline: none;
+}
+
+.loginButton {
+  width: 25%;
+  height: 40px;
+  font-size: 20px;
+  color: white;
+  background-image: linear-gradient(to top, steelblue, rgb(72, 136, 255));
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px black;
+  outline: none;
+}
+
+@media (max-width: 570px) {
+  header {
+    font-size: 8px;
+    text-align: center;
+    color: black;
+    margin: 5px;
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chatContainer {
+    width: 400px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #chatMessages {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 10px;
+    box-shadow: 1px 2px 15px black;
+    margin: 2px;
+    overflow: hidden;
+  }
+
+  .messageContainer {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 8px;
+    background-image: linear-gradient(to top, steelblue, rgb(72, 136, 255));
+    border-radius: 10px;
+    margin: 10px;
+
+    word-wrap: break-word; /* Quebra a palavra */
+  }
+
+  .inputs {
+    width: 80%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .inputMessage {
+    width: 50%;
+    height: 30px;
+    font-size: 8px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+    margin: 5px;
+    outline: none;
+  }
+
+  .buttonSendMessage {
+    width: 20%;
+    height: 30px;
+    font-size: 8px;
+    background-color: rgb(101, 251, 231);
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+    outline: none;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  .usersContainer {
+    width: 60%;
+    height: 87%;
+    text-align: center;
+  }
+
+  .usersContainer h1 {
+    font-size: 12px;
+    margin: 5px;
+  }
+
+  .usersStatus {
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border: 3px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+    overflow: hidden;
+  }
+
+  .messageWarningDisconnect {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 8px;
+    word-wrap: break-word;
+    background-color: rgb(228, 63, 34);
+    text-align: center;
+    border-radius: 10px;
+    margin: 10px;
+  }
+
+  .messageWarningConnect {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 8px;
+    word-wrap: break-word;
+    background-color: rgb(57, 228, 34);
+    text-align: center;
+    border-radius: 10px;
+    margin: 10px;
+  }
+
+  /* Login Styles */
+
+  .infoTitle {
+    font-size: 12px;
+    color: white;
+    text-shadow: 2px 2px 5px black;
+  }
+
+  .nameInput {
+    width: 70%;
+    height: 30px;
+    text-align: center;
+    font-size: 8px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+    margin: 30px;
+    outline: none;
+  }
+
+  .loginButton {
+    width: 25%;
+    height: 30px;
+    font-size: 8px;
+    color: white;
+    background-image: linear-gradient(to top, steelblue, rgb(72, 136, 255));
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+    outline: none;
+  }
+}

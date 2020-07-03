@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <!-- Importa de forma estática o socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <title>CHAT</title>
+  </head>
+  <body>
+    <header>
+      <br />
+      <h1>CHAT BOX</h1>
+    </header>
+
+    <div class="container">
+      <form class="chatContainer">
+        <div id="chatMessages"></div>
+        <div id="userTyping"></div>
+        <div class="inputs">
+          <input
+            type="text"
+            placeholder="Escreva uma mensagem aqui..."
+            class="inputMessage"
+          />
+          <button class="buttonSendMessage" type="submit">Enviar</button>
+        </div>
+      </form>
+
+      <div class="usersContainer">
+        <h4 id="contador">Usuários</h4>
+        <div class="usersStatus"></div>
+        <div id="userDisconnect"></div>
+      </div>
+    </div>
+
+    <script>
+      const socket = io(); // Função Global que retorna um EventEmitter
+      const form = document.querySelector('form');
+      const chat = document.querySelector(`#chatMessages`);
+      const inputMsg = document.querySelector('.inputMessage');
+      const usersLogs = document.querySelector('.usersStatus');
+      const userTyping = document.querySelector('#userTyping');
+      const contador = document.querySelector('#contador');
+
+      function removeListaDeUsuariosOnline() {
+        if (document.querySelector('.messageWarningConnect')) {
+          usersLogs.innerHTML = '';
+        }
+      }
+
+      function listaUsuariosOnline(usuarios) {
+        removeListaDeUsuariosOnline(); // Remove todos os nós filhos do usersLog
+        usuarios.map((usuario) => {
+          let div = document.createElement('div');
+          div.className = 'messageWarningConnect';
+
+          let message = document.createElement('p');
+          message.className = 'message';
+          message.innerText = `${usuario.nome}`;
+
+          div.append(message);
+          usersLogs.append(div);
+        });
+      }
+
+      function atualizaNumeroDeUsuariosOnline(nUsuarios) {
+        contador.innerText = `Usuários online: ${nUsuarios}`;
+      }
+
+      socket.on('connect', () => {
+        console.log('Você está conctado no servidor!');
+        socket.on('connected', (usuarios) => {
+          atualizaNumeroDeUsuariosOnline(usuarios.length); // Atualiza o contador de usuários online.
+          listaUsuariosOnline(usuarios);
+          document.querySelector('#userDisconnect').className = '';
+        });
+      });
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        if (inputMsg.value === '') {
+          alert('Digite uma mensagem!');
+          return;
+        }
+
+        socket.emit('Chat message', inputMsg.value);
+        inputMsg.value = '';
+      });
+
+      socket.on('broadcast', (usuario) => {
+        if (usuario.message !== '') {
+          let div = document.createElement('div');
+          div.className = 'messageContainer';
+
+          let author = document.createElement('p');
+          author.className = 'author';
+
+          let message = document.createElement('p');
+          message.className = 'message';
+
+          author.innerText = `${usuario.nome}`;
+          message.innerText = `${usuario.mensagem} `;
+
+          div.append(author);
+          div.append(message);
+          chat.append(div);
+          chat.scrollTop = chat.scrollHeight; // Faz com que o scroll fique sempre embaixo.
+
+          userTyping.innerHTML = '';
+          userTyping.className = '';
+        }
+      });
+
+      // Quando o usuário digitar emitirá uma mensagem ao servidor que está digitando
+      inputMsg.addEventListener('keypress', () => {
+        socket.emit('typing', 'digitando...');
+      });
+
+      socket.on('typing', (mensagem) => {
+        userTyping.innerText = mensagem;
+        userTyping.className = 'userTyping';
+      });
+
+      socket.on('userDisconnect', ({ usuarioDesconectado, usuariosOnline }) => {
+        atualizaNumeroDeUsuariosOnline(usuariosOnline.length); // Atualiza o contador de usuários online.
+        listaUsuariosOnline(usuariosOnline);
+        document.querySelector('#userDisconnect').className = 'userDisconnect';
+        document.querySelector(
+          '#userDisconnect'
+        ).innerText = `${usuarioDesconectado.nome} desconectou!`;
+
+        setInterval(() => {
+          document.querySelector('#userDisconnect').className = '';
+          document.querySelector('#userDisconnect').innerText = '';
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>
